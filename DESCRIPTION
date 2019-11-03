@@ -13,7 +13,6 @@ Imports:
     dplyr,
     tidyr,
     purrr,
-    rlang,
     httr,
     jsonlite,
     httpuv,

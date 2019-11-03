@@ -242,32 +242,7 @@ get_activity_goals <- function(token, period, simplify=TRUE)
   tidy_output(get(url, token), simplify)
 }
 
-#' @title Update Activity Goals
-#'
-#' @description
-#'   \code{update_activity_goals()} creates or updates a user's daily activity goals.
-#'
-#' @inheritParams inheritparams_token
-#' @param period daily or weekly
-#' @param calories_out optional	Goal value; integer.
-#' @param active_minutes optional	Goal value; integer.
-#' @param floors optional	Goal value; integer.
-#' @param distance optional	Goal value; in the format X.XX or integer.
-#' @param steps optional	Goal value; integer.
-#'
-#' @details
-#'   See \url{https://dev.fitbit.com/reference/web-api/activity/#update-activity-goals} for more details.
-#'
-#' @export
-update_activity_goals <- function(token, period, calories_out=NULL, active_minutes=NULL, floors=NULL, distance=NULL, steps=NULL)
-{
-  #POST https://api.fitbit.com/1/user/[user-id]/activities/goals/[period].json
-  url <- paste0(url_activity, sprintf("goals/%s.json", period))
-  post_arguments <- c("calories_out", "active_minutes", "floors", "distance", "steps")
-  body <- purrr::map(rlang::set_names(post_arguments), ~ rlang::eval_tidy(rlang::sym(.x)))
-  names(body) <- stringr::str_replace_all(names(body), "(_)([a-z])", function(x){stringr::str_to_upper(stringr::str_sub(x, 2))})
-  tidy_output(post(url, token, body), simplify=TRUE)
-}
+
 
 #' @title Get Lifetime Stats
 #'
